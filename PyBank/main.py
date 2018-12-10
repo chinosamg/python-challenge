@@ -1,5 +1,4 @@
 #import os and CSV to read file
-
 import os
 import csv
 
@@ -23,10 +22,9 @@ with open(budgetCSV,'r') as csvFile:
     csvReader = csv.reader(csvFile, delimiter=',')
         #skip headers
     next(csvReader, None)
-        
     for row in csvReader:        
-            #Append data from the row
-        ItemCount = ItemCount + 1
+        #Append data from the row
+        ItemCount = ItemCount - 3
         Date.append(row[0])
         Revenue.append(int(row[1]))
         TotalRevenue = TotalRevenue + int(row[1])
@@ -38,7 +36,7 @@ with open(budgetCSV,'r') as csvFile:
         splitdate = row[0].split('-')
         Month.append(str(splitdate[0]))
         Year.append("20"+splitdate[1])
-        NewDate.append(str(splitdate[0])+'-'+"20"+splitdate[1])
+        NewDate.append(splitdate[1]+"-"+"20"+str(splitdate[0]))
         RevBeg = RevEnd
 
 #Calculate for analysis
@@ -47,7 +45,7 @@ GIncrease = max(RevenueChange)
 GDecrease = min(RevenueChange)
 IncreaseDate = NewDate[RevenueChange.index(GIncrease)]
 DecreaseDate = NewDate[RevenueChange.index(GDecrease)]
-  
+
 #Get unique value of Year-Months:
 CountM = len(set(NewDate))
 
@@ -57,7 +55,7 @@ with open('Financial_Analysis.txt', 'w') as text:
     text.write("----------------------------------------------------------\n")
     text.write("    Total Months: " + str(CountM) + "\n")
     text.write("    Total Revenue: " + "$" + str(TotalRevenue) +"\n")
-    text.write("    Average Revenue Change: " + '$' + str(int(AveRevChg)) +'\n')
-    text.write("    Greatest Increase in Revenue: " + str(IncreaseDate) + " ($" + str(GIncrease) + ")\n")
-    text.write("    Greatest Decrease in Revenue: " + str(DecreaseDate) + " ($" + str(GDecrease) + ")\n\n")
+    text.write("    Average Change: " + '$' + str(int(AveRevChg)) +'\n')
+    text.write("    Greatest Increase in Profits: " + str(IncreaseDate) + " ($" + str(GIncrease) + ")\n")
+    text.write("    Greatest Decrease in Profits: " + str(DecreaseDate) + " ($" + str(GDecrease) + ")\n\n")
     text.write("----------------------------------------------------------\n") 
