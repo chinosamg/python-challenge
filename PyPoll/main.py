@@ -39,4 +39,4 @@ with open('Election_Data.csv'+ '.txt', 'w') as text:
             text.write(CandidateUnique[i] + ": " + str(round(CVotePercent[i]*100,1)) +"% (" + str(CVoteCount[i]) + ")\n")
         text.write("----------------------------------------------------------\n")
         text.write("Winner: " + Winner +"\n")
-        text.write("----------------------------------------------------------\n")  
+        text.write("----------------------------------------------------------\n") 

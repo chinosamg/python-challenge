@@ -22,9 +22,13 @@ with open(budgetCSV,'r') as csvFile:
     csvReader = csv.reader(csvFile, delimiter=',')
         #skip headers
     next(csvReader, None)
-    for row in csvReader:        
-        #Append data from the row
-        ItemCount = ItemCount - 3
+    firstrow = True
+    for row in csvReader: 
+        if firstrow == True:
+            firstrow = False
+            RevBeg = int(row[1])
+        #Append data from the row 1
+        ItemCount = ItemCount + 1
         Date.append(row[0])
         Revenue.append(int(row[1]))
         TotalRevenue = TotalRevenue + int(row[1])
@@ -40,7 +44,7 @@ with open(budgetCSV,'r') as csvFile:
         RevBeg = RevEnd
 
 #Calculate for analysis
-AveRevChg = TotalRevChange / ItemCount
+AveRevChg = TotalRevChange / (ItemCount - 1)
 GIncrease = max(RevenueChange)
 GDecrease = min(RevenueChange)
 IncreaseDate = NewDate[RevenueChange.index(GIncrease)]
